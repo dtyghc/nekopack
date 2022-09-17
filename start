@@ -3,17 +3,17 @@
 _get_zlink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO == "goodcat" ]]
+    if [[ $UPSTREAM_REPO == "https://github.com/dtyghc/catuserbot" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL1RnQ2F0VUIvY2F0dXNlcmJvdC9hcmNoaXZlL21hc3Rlci56aXA=" | base64 -d
-    elif [[ $UPSTREAM_REPO == "badcat" ]]
+    elif [[ $UPSTREAM_REPO == "https://github.com/dtyghc/catuserbot" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL2ppc2FuMDkvY2F0dXNlcmJvdC9hcmNoaXZlL21hc3Rlci56aXA=" | base64 -d
-    elif [[ $UPSTREAM_REPO =~ $regex ]]
+    elif [[ $UPSTREAM_REPO == "https://github.com/dtyghc/catuserbot" ]]
     then
         if [[ $UPSTREAM_REPO_BRANCH ]]
         then
-            echo "${UPSTREAM_REPO}/archive/${UPSTREAM_REPO_BRANCH}.zip"
+            echo "https://github.com/dtyghc/catuserbot/archive/master.zip"
         else
             echo "${UPSTREAM_REPO}/archive/master.zip"
         fi
@@ -26,15 +26,15 @@ _get_repolink () {
     local regex
     local rlink
     regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO == "goodcat" ]]
+    if [[ $UPSTREAM_REPO == "https://github.com/dtyghc/catuserbot" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RnQ2F0VUIvY2F0dXNlcmJvdA==" | base64 -d`
-    elif [[ $UPSTREAM_REPO == "badcat" ]]
+    elif [[ $UPSTREAM_REPO == "https://github.com/dtyghc/catuserbot" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0ppc2FuMDkvY2F0dXNlcmJvdA==" | base64 -d`
-    elif [[ $UPSTREAM_REPO =~ $regex ]]
+    elif [[ $UPSTREAM_REPO == "https://github.com/dtyghc/catuserbot" ]]
     then
-        rlink=`echo "${UPSTREAM_REPO}"`
+        rlink=`echo "https://github.com/dtyghc/catuserbot"`
     else
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RnQ2F0VUIvY2F0dXNlcmJvdA==" | base64 -d`
     fi
@@ -49,8 +49,10 @@ _run_python_code() {
 _run_catpackgit() {
     $(_run_python_code 'from git import Repo
 import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/TgCatUB/nekopack"
+
+OFFICIAL_UPSTREAM_REPO = "https://github.com/dtyghc/nekopack"
 ACTIVE_BRANCH_NAME = "master"
+
 repo = Repo.init()
 origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
 origin.fetch()
